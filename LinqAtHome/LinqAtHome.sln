@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqAtHome", "LinqAtHome\LinqAtHome.csproj", "{F845E683-5576-4885-8CD9-4912A48DE63A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqAtHome.Tests", "LinqAtHome.Tests\LinqAtHome.Tests.csproj", "{AC113FD1-9B4E-4468-8AEB-ADE16C554311}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F845E683-5576-4885-8CD9-4912A48DE63A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F845E683-5576-4885-8CD9-4912A48DE63A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F845E683-5576-4885-8CD9-4912A48DE63A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F845E683-5576-4885-8CD9-4912A48DE63A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC113FD1-9B4E-4468-8AEB-ADE16C554311}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC113FD1-9B4E-4468-8AEB-ADE16C554311}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC113FD1-9B4E-4468-8AEB-ADE16C554311}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC113FD1-9B4E-4468-8AEB-ADE16C554311}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
