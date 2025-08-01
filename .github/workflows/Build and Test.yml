@@ -1,0 +1,47 @@
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches: 
+      - main
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-quality: ga
+          dotnet-version: 9
+
+      - name: Build
+        working-directory: LinqAtHome
+        run: dotnet build --configuration Release
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          include-hidden-files: true
+          if-no-files-found: error
+          path: |
+            ./LinqAtHome/**/bin
+            ./LinqAtHome/**/obj
+
+      - name: Test
+        working-directory: LinqAtHome
+        run: dotnet test --configuration Release --no-build --logger "trx;LogFilePrefix=trx-results" --results-directory ./reports
+        continue-on-error: true
+
+      - uses: dorny/test-reporter@v2
+        with:
+          name: "Test results"
+          path: "./LinqAtHome/reports/trx-results*"
+          reporter: "dotnet-trx"
+          fail-on-error: true
+          list-tests: "failed"
