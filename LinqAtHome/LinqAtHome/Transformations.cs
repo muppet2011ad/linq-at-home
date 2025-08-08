@@ -46,4 +46,19 @@ public static class Transformations
 
         return new ReversingEnumerable<T>(source);
     }
+    
+    public static IEnumerable<T> OrderBy<T>(this IEnumerable<T> source)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+
+        return new SortingEnumerable<T, T>(source, x => x);
+    }
+    
+    public static IEnumerable<TSource> OrderBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(keySelector);
+
+        return new SortingEnumerable<TSource, TKey>(source, keySelector);
+    }
 }

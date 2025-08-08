@@ -24,6 +24,18 @@ public class TransformationTests
         yield return new TestCaseData(new TestDelegate
                 (() => Transformations.Reverse<int>(null!)))
             .SetName("Reverse with null source");
+        
+        yield return new TestCaseData(new TestDelegate
+                (() => Transformations.OrderBy<int>(null!)))
+            .SetName("OrderBy (no keyfunc) with null source");
+        
+        yield return new TestCaseData(new TestDelegate
+                (() => Transformations.OrderBy<int, int>(null!, x => x)))
+            .SetName("OrderBy with null source");
+        
+        yield return new TestCaseData(new TestDelegate
+                (() => Transformations.OrderBy<int, int>([1, 2, 3], null!)))
+            .SetName("OrderBy with null key function");
         // ReSharper restore IteratorMethodResultIsIgnored
     }
     
@@ -115,5 +127,33 @@ public class TransformationTests
         var result = reversed.ToArray();
         
         Assert.That(result, Is.EqualTo(new[] { 3, 2, 1 }));
+    }
+    
+    [Test]
+    public void OrderBy_returns_SortingEnumerable()
+    {
+        var source = new[] { 3, 1, 2 };
+        
+        var ordered = source.OrderBy();
+        
+        Assert.That(ordered, Is.InstanceOf<SortingEnumerable<int, int>>());
+        
+        var result = ordered.ToArray();
+        
+        Assert.That(result, Is.EqualTo(new[] { 1, 2, 3 }));
+    }
+    
+    [Test]
+    public void OrderBy_with_keySelector_returns_SortingEnumerable()
+    {
+        var source = new[] { "aa", "a", "aaa" };
+        
+        var ordered = source.OrderBy(x => x.Length);
+        
+        Assert.That(ordered, Is.InstanceOf<SortingEnumerable<string, int>>());
+        
+        var result = ordered.ToArray();
+        
+        Assert.That(result, Is.EqualTo(new[] { "a", "aa", "aaa" }));
     }
 }
